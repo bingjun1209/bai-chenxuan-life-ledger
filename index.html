@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="白宸瑄的個人網站與生活記帳工具。" />
+  <title>白宸瑄｜我的生活記帳</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="回到首頁">
+      <span class="brand-mark">白</span>
+      <span>
+        <strong>白宸瑄</strong>
+        <small>資工 2A</small>
+      </span>
+    </a>
+
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+      <span class="sr-only">開啟選單</span>
+    </button>
+
+    <nav class="site-nav" id="siteNav" aria-label="主要選單">
+      <a href="#home">首頁</a>
+      <a href="#about">關於我</a>
+      <a href="#ledger">生活記帳</a>
+      <a href="#notes">生活小記</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">HELLO, NICE TO MEET YOU</p>
+        <h1>嗨，我是<br /><span>白宸瑄</span></h1>
+        <p class="hero-text">
+          我是資工 2A 的學生，平常喜歡接觸電腦、網頁與遊戲。
+          我也開始把每天的花費記下來，慢慢了解自己的消費習慣。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#ledger">開始記帳</a>
+          <a class="button secondary" href="#about">認識我</a>
+        </div>
+      </div>
+
+      <div class="hero-photo-wrap">
+        <div class="photo-card">
+          <img src="assets/profile.png" alt="白宸瑄在聖誕樹前的照片" />
+        </div>
+        <div class="photo-note">
+          <span>📍</span>
+          <p><strong>日常紀錄</strong><br />把普通的生活，好好保存下來。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="section-heading">
+        <p class="eyebrow">ABOUT ME</p>
+        <h2>關於我</h2>
+        <p>我喜歡從實際操作中學習，也喜歡把複雜的事情整理成簡單好用的方式。</p>
+      </div>
+
+      <div class="about-grid">
+        <article class="about-card">
+          <span class="card-number">01</span>
+          <h3>目前就讀</h3>
+          <p>資工 2A，持續學習程式設計、網頁製作與電腦相關知識。</p>
+        </article>
+        <article class="about-card">
+          <span class="card-number">02</span>
+          <h3>平常興趣</h3>
+          <p>玩遊戲、研究電腦設備，也會留意各種實用的網站與工具。</p>
+        </article>
+        <article class="about-card">
+          <span class="card-number">03</span>
+          <h3>生活習慣</h3>
+          <p>把每天的花費簡單記下來，方便回頭看看錢都花在哪裡。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ledger section" id="ledger">
+      <div class="section-heading ledger-heading">
+        <div>
+          <p class="eyebrow">DAILY LEDGER</p>
+          <h2>我的生活記帳</h2>
+          <p>輸入每天的消費，資料會保存在目前使用的瀏覽器中。</p>
+        </div>
+        <button class="text-button" id="exportButton" type="button">匯出 CSV</button>
+      </div>
+
+      <div class="summary-grid" aria-label="支出摘要">
+        <article class="summary-card">
+          <span>本月支出</span>
+          <strong id="monthTotal">NT$ 0</strong>
+          <small id="monthLabel">本月累計</small>
+        </article>
+        <article class="summary-card">
+          <span>今日支出</span>
+          <strong id="todayTotal">NT$ 0</strong>
+          <small id="todayLabel">今天尚未記帳</small>
+        </article>
+        <article class="summary-card">
+          <span>紀錄筆數</span>
+          <strong id="recordCount">0 筆</strong>
+          <small>目前保存的紀錄</small>
+        </article>
+      </div>
+
+      <div class="ledger-layout">
+        <aside class="entry-panel">
+          <h3>新增一筆消費</h3>
+          <form id="expenseForm" novalidate>
+            <label>
+              消費項目
+              <input id="itemInput" name="item" type="text" maxlength="30" placeholder="例如：午餐" autocomplete="off" required />
+            </label>
+
+            <div class="form-row">
+              <label>
+                金額
+                <input id="amountInput" name="amount" type="number" min="1" step="1" placeholder="100" inputmode="numeric" required />
+              </label>
+              <label>
+                類別
+                <select id="categoryInput" name="category">
+                  <option value="飲食">飲食</option>
+                  <option value="交通">交通</option>
+                  <option value="娛樂">娛樂</option>
+                  <option value="購物">購物</option>
+                  <option value="生活">生活</option>
+                  <option value="其他">其他</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              日期
+              <input id="dateInput" name="date" type="date" required />
+            </label>
+
+            <label>
+              備註 <span class="optional">選填</span>
+              <textarea id="noteInput" name="note" rows="3" maxlength="80" placeholder="簡單寫下這筆消費"></textarea>
+            </label>
+
+            <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+            <button class="button primary full" type="submit">加入紀錄</button>
+          </form>
+        </aside>
+
+        <div class="records-panel">
+          <div class="records-toolbar">
+            <div>
+              <h3>消費紀錄</h3>
+              <p id="resultText">顯示全部紀錄</p>
+            </div>
+            <button class="danger-link" id="clearButton" type="button">清除全部</button>
+          </div>
+
+          <div class="filters">
+            <label>
+              <span class="sr-only">搜尋項目</span>
+              <input id="searchInput" type="search" placeholder="搜尋項目或備註" />
+            </label>
+            <label>
+              <span class="sr-only">依類別篩選</span>
+              <select id="categoryFilter">
+                <option value="全部">全部類別</option>
+                <option value="飲食">飲食</option>
+                <option value="交通">交通</option>
+                <option value="娛樂">娛樂</option>
+                <option value="購物">購物</option>
+                <option value="生活">生活</option>
+                <option value="其他">其他</option>
+              </select>
+            </label>
+            <label>
+              <span class="sr-only">依月份篩選</span>
+              <input id="monthFilter" type="month" />
+            </label>
+          </div>
+
+          <div class="records-list" id="recordsList"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <span>🧾</span>
+            <h4>還沒有符合的紀錄</h4>
+            <p>新增第一筆消費，或調整上方的篩選條件。</p>
+          </div>
+
+          <div class="category-summary">
+            <div class="category-summary-heading">
+              <h3>類別分布</h3>
+              <span id="distributionLabel">目前全部紀錄</span>
+            </div>
+            <div id="categoryBars" class="category-bars"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes section" id="notes">
+      <div class="section-heading">
+        <p class="eyebrow">LITTLE THINGS</p>
+        <h2>生活小記</h2>
+        <p>有些事情不用很特別，只要自己記得就很好。</p>
+      </div>
+
+      <div class="note-grid">
+        <article class="note-card large">
+          <span>近期目標</span>
+          <h3>把學過的東西真正做出來</h3>
+          <p>比起只看範例，我更想透過實際操作，慢慢累積自己的經驗。</p>
+        </article>
+        <article class="note-card">
+          <span>喜歡的事</span>
+          <h3>遊戲與電腦</h3>
+          <p>除了放鬆，也能從中發現不少設計與系統上的細節。</p>
+        </article>
+        <article class="note-card">
+          <span>給自己的提醒</span>
+          <h3>一步一步完成</h3>
+          <p>不用急著一次做到最好，先完成，再慢慢調整。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>白宸瑄 · 資工 2A</p>
+    <a href="#home">回到上方 ↑</a>
+  </footer>
+
+  <template id="recordTemplate">
+    <article class="record-item">
+      <div class="record-date">
+        <strong class="date-day"></strong>
+        <span class="date-month"></span>
+      </div>
+      <div class="record-main">
+        <div class="record-title-row">
+          <h4 class="record-title"></h4>
+          <span class="category-tag"></span>
+        </div>
+        <p class="record-note"></p>
+      </div>
+      <strong class="record-amount"></strong>
+      <button class="delete-button" type="button" aria-label="刪除此筆紀錄">刪除</button>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
